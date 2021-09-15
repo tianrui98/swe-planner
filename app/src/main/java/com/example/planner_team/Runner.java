@@ -88,7 +88,7 @@ public class Runner {
 	assert b.getSections().size() == 2;
 
 	System.out.print("Remove Test Section 2: ");
-	b.removeSection(new Section("Test Section 2"));
+	b.removeSection(s2);
 	System.out.print("After remove: ");
 	System.out.println(b.getSections().toString());
 	assert b.getSections().size() == 1;
