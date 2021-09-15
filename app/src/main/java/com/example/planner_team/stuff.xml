@@ -1,0 +1,13 @@
+<planner>
+    <Task>
+        <Name>
+            Eat Tomatoes
+        </Name>
+        <Description>
+            Eat Some Tomatoes
+        </Description>
+        <Duration>1</Duration>
+        <SubTasks>
+        </SubTasks>
+    </Task>
+</planner>

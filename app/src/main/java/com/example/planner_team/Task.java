@@ -1,5 +1,8 @@
 package com.example.planner_team;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +35,26 @@ public class Task {
             System.out.println(subTasks.get(counter).name);
         }
 
+    }
+
+    public static Element createChildTextNode(String label, String value, Element parent, Document document) {
+        Element name = document.createElement(label);
+        name.appendChild(document.createTextNode(value);
+        parent.appendChild(name);
+    }
+
+    public static Element createTaskElement(ITask t, Document document) {
+        Element e = document.createElement("task");
+        createChildTextNode("name", t.getName(), e, document);
+        createChildTextNode("description", t.getDescription(), e, document);
+        createChildTextNode("duration", t.getExpectedDuration().toString(), e, document);
+
+        Iterable<ITask> subTask = t.getSubTasks();
+        for(ITask i : subTask){
+            Element newTask = createTaskElement(i,document);
+            e.appendChild(newTask);
+        }
+        return e;
     }
 
 }
