@@ -21,27 +21,27 @@ public class Board implements IBoard {
         this.name = name;
     }
 
-    String getName(){
+    public String getName(){
         return this.name;
     }
 
-    Iterable<ISection> getSections(){
-        return this.sections.values().iterator();
+    public Iterable<ISection> getSections(){
+        return this.sections.values();
     }
 
-    void addSection(ISection t) throws AlreadyExistsException {
-        Section tmp = this.sections.get(t.getName());
+    public void addSection(ISection t) throws AlreadyExistsException {
+        ISection tmp = this.sections.get(t.getName());
         if (tmp != null) throw new AlreadyExistsException();
         this.sections.put(t.getName(), t);
     }
 
-    void removeSection(ISection t) throws NotFoundException {
-        Section tmp = this.sections.get(t.getName());
+    public void removeSection(ISection t) throws NotFoundException {
+        ISection tmp = this.sections.get(t.getName());
         if (tmp == null) throw new NotFoundException();
         this.sections.remove(t.getName());
     }
-    ISection getSection(String sectionName)  throws NotFoundException {
-        Section tmp = this.sections.get(t.getName());
+    public ISection getSection(String sectionName)  throws NotFoundException {
+        ISection tmp = this.sections.get(sectionName);
         if (tmp == null) throw new NotFoundException();
         return tmp;
     }
