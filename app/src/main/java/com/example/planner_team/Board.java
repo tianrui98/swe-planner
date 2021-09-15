@@ -1,43 +1,23 @@
+package com.example.planner_team;
+
 import java.time.Duration;
 import java.util.HashMap;
-import AlreadyExistsException;
-import NotFoundException;
+import com.example.planner_team.AlreadyExistsException;
+import com.example.planner_team.NotFoundException;
+import com.example.planner_team.Interfaces.IBoard;
+import com.example.planner_team.Interfaces.ISection;
+import com.example.planner_team.Interfaces.ITask;
 
-public interface ITask {
-    String getName();
-    String getDescription();
-    Duration getExpectedDuration();
 
-    Iterable<ITask> getSubTasks();
-    void addSubTask(ITask t) throws AlreadyExistsException;
-    void removeSubTasks(ITask t) throws NotFoundException;
-}
-
-public interface ISection {
-    String getName();
-    Iterable<Task> getTasks();
-    void addTask(ITask t) throws AlreadyExistsException;
-    void removeTask(ITask t) throws NotFoundException;
-}
-
-public interface IBoard {
-    String getName();
-    Iterable<ISection> getSections();
-    void addSection(ISection t) throws AlreadyExistsException;
-    void removeSection(ISection t) throws NotFoundException;
-    ISection getSection(String sectionName)  throws NotFoundException;
-
-}
-
-public class IBoard implements IBoard {
+public class Board implements IBoard {
     private HashMap<String, ISection> sections = new HashMap<String, ISection>();
     private String name;
 
-    public IBoard(){
+    public Board(){
         this.name = "";
     }
 
-    public IBoard(String name){
+    public Board(String name){
         this.name = name;
     }
 
