@@ -5,8 +5,9 @@ import java.util.List;
 import com.example.planner_team.ISection;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Attr;
 
-public class Section implements ISection{
+public class Section implements ISection {
     private String name;
     private List<Task> tasks;
 
@@ -30,37 +31,32 @@ public class Section implements ISection{
         return false;
     }
 
-    public void addTask(Task addT) throws AlreadyExistsException{
+    public void addTask(Task addT) throws AlreadyExistsException {
         if (this.isPresent(addT)) {
             throw new AlreadyExistsException();
         }
         this.tasks.add(addT);
     }
 
-    public void removeTask(Task removeT) throws NotFoundException{
+    public void removeTask(Task removeT) throws NotFoundException {
         if (!this.isPresent(removeT)) throw new NotFoundException();
         this.tasks.remove(removeT);
     }
 
-    public static void createSectionElement(Section s, Document document) {
-        DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
-
-        DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
-
-        Document document = documentBuilder.newDocument();
-
+    public static Element createSectionElement(Section s, Document document) {
         Element section = document.createElement("section");
 
         Attr name = document.createAttribute("name");
-        attr.setValue(s.getName());
+        name.setValue(s.getName());
         section.setAttributeNode(name);
 
-        Iterable<ITask> tasks= s.getTasks();
+        Iterable<Task> tasks = s.getTasks();
 
-        for (ITask i : tasks){
-            Element newTask = i.createTaskElement();
+        for (Task t : tasks) {
+            Element newTask = t.createTaskElement();
             section.appendChild(newTask);
         }
 
         return section;
+    }
 }
