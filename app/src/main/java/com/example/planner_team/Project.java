@@ -1,39 +1,31 @@
 package com.example.planner_team;
-
-//public interface IProject{
-//    String getName();
-//    Iterable<ITask> getTasks();
-//    void addTask(ITask t) throws AlreadyExistsException;
-//    void removeTask(ITask t) throws NotFoundException;
-//}
+import java.util.*;
 
 public class Project implements IProject {
-    private HashMap<String, ITask> tasks = new HashMap<String, ITask>();
+    private ArrayList<ITask> tasks = new ArrayList<ITask>();
     static String name;
 
     public static void setName(String name) {
         Project.name = name;
     }
 
-    public static String getName() {
+    public String getName() {
         return name;
     }
 
-    public static Iterable<ITask> getTasks() {
-        return this.tasks.values().iterator();
+    public Iterable<ITask> getTasks() {
+        return this.tasks;
     }
 
-    public static void addTask(ITask t) throws AlreadyExistsException {
-        Task tmp = this.tasks.get(t.getName());
-        if (tmp != null) throw new AlreadyExistsException();
-        this.tasks.put(t.getName(), t);
+    public void addTask(ITask t) throws AlreadyExistsException {
+        if (this.tasks.contains(t)) throw new AlreadyExistsException();
+        this.tasks.add(t);
     }
 
-    public static void removeTask(ITask t) throws NotFoundException {
-        Task tmp = this.tasks.get(t.getName());
-        if (tmp == null) throws new NotFoundException();
-        return tmp;
-    }
+    public void removeTask(ITask t) throws NotFoundException {
 
+        if (!this.tasks.contains(t)) throw new NotFoundException();
+        this.tasks.remove(t);
+    }
 
 }
