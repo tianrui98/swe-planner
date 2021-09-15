@@ -13,11 +13,7 @@ import org.w3c.dom.Element;
 
 public class Board implements IBoard {
     private HashMap<String, ISection> sections = new HashMap<String, ISection>();
-    private String name;
-
-    public Board(){
-        this.name = "";
-    }
+    private String name = "";
 
     public Board(String name){
         this.name = name;

@@ -44,7 +44,55 @@ public class Runner {
         }
 
         /* test Board */
-        
+	Board b = new Board("Test Board 1");
+	System.out.print("Board name: ");
+	System.out.println(b.getName());
+	b.addSection(newSection);
+	System.out.print("After 1 sections added: ");
+	System.out.println(b.getSections().toString());
+	assert b.getSections().size() == 1;
+	try {
+	    b.addSection(newSection);
+	} catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Cannot add 2 of the same section");
+        } 
+        Section s2 = new Section("Test Section 2");
+	b.addSection(s2);
+	System.out.print("After 2 sections added: ");
+	System.out.println(b.getSections().toString());
+	assert b.getSections().size() == 2;
+
+	System.out.print("Queried Greens: ");
+	System.out.println(b.getSection("Greens").getName());
+	System.out.print("After query: ");
+	System.out.println(b.getSections().toString());
+	assert b.getSections().size() == 2;
+
+	try {
+	    System.out.print("Queried Test Section 3: ");
+	    System.out.println(b.getSection("Test Section 3").getName());
+	} catch (Exception e) {
+		System.out.print("After failed query: ");
+		System.out.println(b.getSections().toString());
+	}
+	assert b.getSections().size() == 2;
+
+	try {
+	    System.out.print("Remove Test Section 3: ");
+	    b.removeSection(new Section("Test Section 3"));
+	} catch (Exception e) {
+		System.out.print("After failed remove: ");
+		System.out.println(b.getSections().toString());
+	}
+	assert b.getSections().size() == 2;
+
+	System.out.print("Remove Test Section 2: ");
+	b.removeSection(new Section("Test Section 2"));
+	System.out.print("After remove: ");
+	System.out.println(b.getSections().toString());
+	assert b.getSections().size() == 1;
+	
         /* test print XML */
 
     }
