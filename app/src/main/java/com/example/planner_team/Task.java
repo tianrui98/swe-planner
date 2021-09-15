@@ -7,32 +7,56 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Task {
+public class Task implements ITask{
     String name;
     String description;
     Duration duration;
-    List<Task> subTasks = new ArrayList<>();;
+    ArrayList<ITask> subTasks = new ArrayList<>();;
 
-    public Task(String name,String description){
-        this.name = name;
-        this.description = description;
-        this.duration = Duration.ofHours(1);
-    }
-
-    public Task(String name,String description,Duration duration){
+    public Task(String name,String description, Duration duration){
         this.name = name;
         this.description = description;
         this.duration = duration;
     }
 
-    public void addSubTask(Task newSubTask){
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public String getDescription() {
+        return this.description;
+    }
+
+    @Override
+    public Duration getExpectedDuration() {
+        return this.duration;
+    }
+
+    @Override
+    public Iterable<ITask> getSubTasks() {
+        return this.subTasks;
+    }
+
+    public void addSubTask(ITask newSubTask){
         subTasks.add(newSubTask);
+    }
+
+    @Override
+    public void removeSubTasks(ITask t) throws NotFoundException {
+        if (!this.subTasks.contains(t)) {
+            throw new NotFoundException();
+        }
+        else{
+            this.subTasks.remove(t);
+        }
     }
 
     public void printSubTasks(){
         System.out.println("Sub Tasks are ");
         for (int counter = 0; counter < subTasks.size(); counter++) {
-            System.out.println(subTasks.get(counter).name);
+            System.out.println(subTasks.get(counter).getName());
         }
 
     }

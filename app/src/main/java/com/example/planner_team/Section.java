@@ -9,51 +9,51 @@ import org.w3c.dom.Attr;
 
 public class Section implements ISection {
     private String name;
-    private List<Task> tasks;
+    private List<ITask> tasks;
 
     public Section(String name) {
         this.name = name;
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<ITask>();
     }
 
     public String getName() {
         return this.name;
     }
 
-    public Iterable<Task> getTasks() {
+    public Iterable<ITask> getTasks() {
         return this.tasks;
     }
 
-    private boolean isPresent(Task tFind) {
-        for (Task t : this.tasks) {
+    private boolean isPresent(ITask tFind) {
+        for (ITask t : this.tasks) {
             if (t == tFind) return true;
         }
         return false;
     }
 
-    public void addTask(Task addT) throws AlreadyExistsException {
+    public void addTask(ITask addT) throws AlreadyExistsException {
         if (this.isPresent(addT)) {
             throw new AlreadyExistsException();
         }
         this.tasks.add(addT);
     }
 
-    public void removeTask(Task removeT) throws NotFoundException {
+    public void removeTask(ITask removeT) throws NotFoundException {
         if (!this.isPresent(removeT)) throw new NotFoundException();
         this.tasks.remove(removeT);
     }
 
-    public static Element createSectionElement(Section s, Document document) {
+    public static Element createSectionElement(ISection s, Document document) {
         Element section = document.createElement("section");
 
         Attr name = document.createAttribute("name");
         name.setValue(s.getName());
         section.setAttributeNode(name);
 
-        Iterable<Task> tasks = s.getTasks();
+        Iterable<ITask> tasks = s.getTasks();
 
-        for (Task t : tasks) {
-            Element newTask = t.createTaskElement();
+        for (ITask t : tasks) {
+            Element newTask = Task.createTaskElement(t, document);
             section.appendChild(newTask);
         }
 

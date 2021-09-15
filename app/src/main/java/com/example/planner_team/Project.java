@@ -1,4 +1,8 @@
 package com.example.planner_team;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import java.util.*;
 
 public class Project implements IProject {
@@ -27,5 +31,19 @@ public class Project implements IProject {
         if (!this.tasks.contains(t)) throw new NotFoundException();
         this.tasks.remove(t);
     }
+    public static Element createProjectElement(IProject b, Document document) {
+        Element project = document.createElement("section");
 
-}
+        Attr name = document.createAttribute("name");
+        name.setValue(b.getName());
+        project.setAttributeNode(name);
+
+        Iterable<ITask> tasks = b.getTasks();
+
+        for (ITask t : tasks) {
+            Element newSection = Task.createTaskElement(t, document);
+            project.appendChild(newSection);
+        }
+
+        return project;
+}}

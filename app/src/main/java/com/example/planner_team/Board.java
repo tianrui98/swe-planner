@@ -6,6 +6,10 @@ import com.example.planner_team.AlreadyExistsException;
 import com.example.planner_team.NotFoundException;
 import com.example.planner_team.IBoard;
 
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 
 public class Board implements IBoard {
     private HashMap<String, ISection> sections = new HashMap<String, ISection>();
@@ -44,6 +48,22 @@ public class Board implements IBoard {
         return tmp;
     }
 
+    public static Element createBoardElement(IBoard b, Document document) {
+        Element board = document.createElement("section");
+
+        Attr name = document.createAttribute("name");
+        name.setValue(b.getName());
+        board.setAttributeNode(name);
+
+        Iterable<ISection> sections = b.getSections();
+
+        for (ISection s : sections) {
+            Element newSection = Section.createSectionElement(s, document);
+            board.appendChild(newSection);
+        }
+
+        return board;
+    }
 
 
 
