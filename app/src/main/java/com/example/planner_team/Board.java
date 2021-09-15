@@ -4,9 +4,7 @@ import java.time.Duration;
 import java.util.HashMap;
 import com.example.planner_team.AlreadyExistsException;
 import com.example.planner_team.NotFoundException;
-import com.example.planner_team.Interfaces.IBoard;
-import com.example.planner_team.Interfaces.ISection;
-import com.example.planner_team.Interfaces.ITask;
+import com.example.planner_team.IBoard;
 
 
 public class Board implements IBoard {
