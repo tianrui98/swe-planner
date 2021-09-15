@@ -37,9 +37,9 @@ public class Task {
 
     }
 
-    public static Element createChildTextNode(String label, String value, Element parent, Document document) {
+    public static void createChildTextNode(String label, String value, Element parent, Document document) {
         Element name = document.createElement(label);
-        name.appendChild(document.createTextNode(value);
+        name.appendChild(document.createTextNode(value));
         parent.appendChild(name);
     }
 
