@@ -2,6 +2,7 @@ package com.example.planner_team;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.example.planner_team.ISection;
 
 public class Section implements ISection{
     private String name;

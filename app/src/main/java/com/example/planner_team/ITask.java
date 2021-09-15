@@ -1,4 +1,5 @@
 package com.example.planner_team;
+
 import java.time.Duration;
 
 public interface ITask {
@@ -8,5 +9,5 @@ public interface ITask {
 
     Iterable<ITask> getSubTasks();
     void addSubTask(ITask t) throws AlreadyExistsException;
-    void removeSubTask(ITask t) throws NotFoundException;
+    void removeSubTasks(ITask t) throws NotFoundException;
 }
