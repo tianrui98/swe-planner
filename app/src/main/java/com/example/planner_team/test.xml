@@ -1,0 +1,49 @@
+<planner>
+    <boards>
+        <IBoard>
+            <name>Test Board 1</name>
+            <section>
+                <entry>
+                    <key>Sample Section 1</key>
+                    <value>
+                        <ISection>
+                            <name>Section 1</name>
+                            <List>
+                                <ITask>
+                                    <name>Task 1</name>
+                                    <description>Task 1 Description</description>
+                                    <Duration>
+                                        3
+                                    </Duration>
+                                    <List name="subtasks">
+                                        <ITask>
+                                            <name>SubTask 1</name>
+                                            <description>SubTask 1 Description</description>
+                                            <Duration>
+                                                33
+                                            </Duration>
+                                        </ITask>
+                                    </List>
+                                </ITask>
+                            </List>
+                        </ISection>
+                    </value>
+                </entry>
+            </section>
+        </IBoard>
+    </boards>
+    <projects>
+        <IProject>
+            <name>"Project 1"</name>
+            <List name="tasks">
+                <ITask>
+                    <name>SubTask 1</name>
+                    <description>SubTask 1 Description</description>
+                    <Duration>
+                        33
+                    </Duration>
+                </ITask>
+            </List>
+        </IProject>
+    </projects>
+</planner>
