@@ -31,19 +31,32 @@ public class Project implements IProject {
         if (!this.tasks.contains(t)) throw new NotFoundException();
         this.tasks.remove(t);
     }
+
     public static Element createProjectElement(IProject b, Document document) {
-        Element project = document.createElement("section");
+	Element project = document.createElement("project");
 
-        Attr name = document.createAttribute("name");
-        name.setValue(b.getName());
-        project.setAttributeNode(name);
+	Attr name = document.createAttribute("name");
+	name.setValue(b.getName());
+	project.setAttributeNode(name);
 
-        Iterable<ITask> tasks = b.getTasks();
+	Iterable<ITask> tasks = b.getTasks();
 
-        for (ITask t : tasks) {
-            Element newSection = Task.createTaskElement(t, document);
-            project.appendChild(newSection);
-        }
+	for (ITask t : tasks) {
+	    Element newSection = Task.createTaskElement(t, document);
+	    project.appendChild(newSection);
+	}
 
-        return project;
-}}
+	return project;
+    }
+
+    public static Project parseProjectElement(Element e, Document document) {
+	String name = e.getElementsByTagName("name").item(0).getTextContent();
+	Project p = new Project(name);
+
+	NodeList tasks = e.getElementsByTagName("task");
+	for (int i=0; i< tasks.getLength(); i++)
+	    p.addTask(Task.parseTaskElement((Element)tasks.get(i), document));
+	
+	return s;
+    }
+}

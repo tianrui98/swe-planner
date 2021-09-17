@@ -59,4 +59,15 @@ public class Section implements ISection {
 
         return section;
     }
+
+    public static Section parseSectionElement(Element e, Document document) {
+        String name = e.getElementsByTagName("name").item(0).getTextContent();
+	Section s = new Section(name);
+
+	NodeList tasks = e.getElementsByTagName("task");
+	for (int i=0; i< tasks.getLength(); i++)
+	    s.addSection(Task.parseTaskElement((Element)tasks.get(i), document));
+	
+	return s;
+    }
 }

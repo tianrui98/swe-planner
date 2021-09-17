@@ -61,6 +61,17 @@ public class Board implements IBoard {
         return board;
     }
 
+    public static Board parseBoardElement(Element e, Document document) {
 
+	String name = e.getElementsByTagName("name").item(0).getTextContent();
+	Board b = new Board(name);
+
+	NodeList sections = e.getElementsByTagName("section");
+	for (int i=0; i< sections.getLength(); i++)
+	    b.addSection(Section.parseSectionElement((Element)sections.get(i),
+						     document));
+	
+	return b;
+    }
 
 }
