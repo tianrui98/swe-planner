@@ -6,6 +6,8 @@ import androidx.annotation.RequiresApi;
 
 import java.time.Duration;
 import java.time.temporal.TemporalUnit;
+import java.util.List;
+
 import static java.time.temporal.ChronoUnit.HOURS;
 public class Runner {
 
@@ -50,7 +52,7 @@ public class Runner {
 	b.addSection(newSection);
 	System.out.print("After 1 sections added: ");
 	System.out.println(b.getSections().toString());
-	assert b.getSections().size() == 1;
+	assert ((List) b.getSections()).size() == 1;
 	try {
 	    b.addSection(newSection);
 	} catch (Exception e) {
@@ -61,13 +63,13 @@ public class Runner {
 	b.addSection(s2);
 	System.out.print("After 2 sections added: ");
 	System.out.println(b.getSections().toString());
-	assert b.getSections().size() == 2;
+	assert ((List) b.getSections()).size() == 2;
 
 	System.out.print("Queried Greens: ");
 	System.out.println(b.getSection("Greens").getName());
 	System.out.print("After query: ");
 	System.out.println(b.getSections().toString());
-	assert b.getSections().size() == 2;
+	assert ((List) b.getSections()).size() == 2;
 
 	try {
 	    System.out.print("Queried Test Section 3: ");
@@ -76,7 +78,7 @@ public class Runner {
 		System.out.print("After failed query: ");
 		System.out.println(b.getSections().toString());
 	}
-	assert b.getSections().size() == 2;
+	assert ((List) b.getSections()).size() == 2;
 
 	try {
 	    System.out.print("Remove Test Section 3: ");
@@ -85,13 +87,17 @@ public class Runner {
 		System.out.print("After failed remove: ");
 		System.out.println(b.getSections().toString());
 	}
-	assert b.getSections().size() == 2;
+	assert ((List) b.getSections()).size() == 2;
 
 	System.out.print("Remove Test Section 2: ");
-	b.removeSection(s2);
+	try {
+		b.removeSection(s2);
+	} catch (Exception e){
+		System.out.println(e.getMessage());
+		}
 	System.out.print("After remove: ");
 	System.out.println(b.getSections().toString());
-	assert b.getSections().size() == 1;
+	assert ((List) b.getSections()).size() == 1;
 	
         /* test print XML */
 
