@@ -87,7 +87,7 @@ public class Planner {
           Document doc = db.parse(data);
 
           // http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
-          //doc.getDocumentElement().normalize();
+          doc.getDocumentElement().normalize();
           NodeList boards = doc.getElementsByTagName("board");
           for (int i = 0; i < boards.getLength(); i++)
 	      this.addBoard(Board.parseBoardElement(boards.get(i), doc));
