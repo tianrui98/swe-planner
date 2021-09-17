@@ -2,6 +2,8 @@ package com.example.planner_team;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -80,5 +82,25 @@ public class Task implements ITask{
         }
         return e;
     }
+
+    public static Task createXMLTask(Element e, Document document){
+        String name = e.getElementsByTagName("name").item(0).getTextContent();
+        String description = e.getElementsByTagName("description").item(0).getTextContent();
+        String duration = e.getElementsByTagName("name").item(0).getTextContent();
+        Duration duration_obj = java.time.Duration.parse(duration);
+        // Duration using ofHours() method
+        NodeList tasks = e.getElementsByTagName("task");
+
+        Task newTask = new Task(name,description,duration_obj);
+
+        for(Integer i = 0;i< tasks.getLength();i++){
+            Node subTask = tasks.item(i);
+            Task newSubTask = Task.createXMLTask((Element) subTask,document);
+            newTask.addSubTask(newSubTask);
+        }
+        return newTask;
+    }
+
+
 
 }
